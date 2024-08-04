@@ -1,0 +1,11 @@
+[package]
+name = "ft_linear_regression"
+version = "0.1.0"
+edition = "2021"
+authors = ["Timur Cakmakoglu"]
+publish = false
+
+[dependencies]
+csv = "1.3.0"
+ndarray = "0.15.6"
+ndarray-csv = "0.5.2"
