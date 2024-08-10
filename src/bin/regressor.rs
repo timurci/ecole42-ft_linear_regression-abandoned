@@ -10,6 +10,11 @@ use std::fs::File;
 use std::env::args;
 use std::path::Path;
 
+use ft_linear_regression::normalization::{
+    mean_std2,
+    std_scaler2
+};
+
 fn read_csv(path: &str, has_headers: bool) -> Result<Array2<f64>, ReadError> {
     let file = match File::open(path) {
         Ok(file) => file,
@@ -129,7 +134,12 @@ fn main() {
     println!("km    [0..5]: {:6}", data.slice(s![0..5, 0]));
     println!("price [0..5]: {:6}", data.slice(s![0..5, 1]));
 
-    let weights = gradient_descent2(&data, learn_rate, min_change);
+    let mean_std = mean_std2(&data, Axis(0));
+    println!("mean:{}\nstd:{}", mean_std.mean(), mean_std.std());
+
+    let data_std = std_scaler2(&data, &mean_std);
+    
+    let weights = gradient_descent2(&data_std, learn_rate, min_change);
 
     println!("Trained weights : {:.5},{:.5}", weights[0], weights[1]);
 }
