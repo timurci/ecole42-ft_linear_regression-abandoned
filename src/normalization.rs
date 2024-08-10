@@ -27,20 +27,10 @@ macro_rules! declare_scalar_row_ops {
     }
 }
 
-fn scalar_sub2(array: &mut Array2<f64>, col_index: usize, value: f64) {
-    for i in 0..array.nrows() {
-        array[[i, col_index]] -= value;
-    }
-}
-
-fn scalar_div2(array: &mut Array2<f64>, col_index: usize, value: f64) {
-    for i in 0..array.nrows() {
-        array[[i, col_index]] /= value;
-    }
-}
-
 declare_scalar_row_ops!(scalar_add2, +=);
+declare_scalar_row_ops!(scalar_sub2, -=);
 declare_scalar_row_ops!(scalar_mul2, *=);
+declare_scalar_row_ops!(scalar_div2, /=);
 
 pub fn std_scaler2(array: &Array2<f64>, params: &StdParams<f64>) -> Array2<f64> {
     // Apply standard scaling along columns
