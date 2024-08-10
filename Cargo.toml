@@ -9,3 +9,7 @@ publish = false
 csv = "1.3.0"
 ndarray = "0.15.6"
 ndarray-csv = "0.5.2"
+
+[[bin]]
+name = "regressor"
+path = "src/bin/regressor.rs"
